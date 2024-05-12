@@ -6,7 +6,7 @@ use Src\Routes\Api\V1\Router;
 
 // Set CORS headers
 
-header("Access-Control-Allow-Origin: http://localhost:4200");
+header("Access-Control-Allow-Origin: http://localhost:4200, https://anuwrap.vercel.app, https://adriangallano.co");
 header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Methods: OPTIONS, GET, POST, PUT, PATCH, DELETE");
 header("Access-Control-Max-Age: 3600");

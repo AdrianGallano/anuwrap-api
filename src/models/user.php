@@ -93,11 +93,11 @@ class User
         
         $queryStr = "UPDATE User 
         SET first_name=:first_name,
-        last_name=:last_name
+        last_name=:last_name, status=:status, image_name=:image_name
         WHERE user_id = :id";
 
-        $stmt = $this->pdo->prepare($queryStr);
         try {
+            $stmt = $this->pdo->prepare($queryStr);
             $stmt->execute(
                 array(
                     "first_name" => $first_name,
