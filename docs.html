@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>API Documentation</h1>
+    <h2>User Routes:</h2>
+    <h3>No Authorization</h3>
+    <table>
+        <tr>
+            <th>Method</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+            <th>Payload</th>
+        </tr>
+        <tr>
+            <td>POST</td>
+            <td>/users</td>
+            <td>Create User</td>
+            <td>username (string), first_name (string), last_name (string), email (string), password (string),
+                confirm_password (string)</td>
+        </tr>
+    </table>
+
+    <h3>Authorized:</h3>
+    <table>
+        <tr>
+            <th>Method</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+            <th>Payload</th>
+            <th>Filters</th>
+        </tr>
+        <tr>
+            <td>PATCH</td>
+            <td>/users/{id}</td>
+            <td>Update a single User</td>
+            <td>first_name (string), last_name (string)</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>DELETE</td>
+            <td>/users/{id}</td>
+            <td>Delete a single User</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/users/{id}</td>
+            <td>Retrieve a single User</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/users</td>
+            <td>Get all users</td>
+            <td>N/A</td>
+            <td>username, email, first_name, last_name</td>
+        </tr>
+    </table>
+    <!-- Authentication Section -->
+    <h2>Authentication:</h2>
+    <table>
+        <tr>
+            <th>Method</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+            <th>Payload</th>
+        </tr>
+        <tr>
+            <td>POST</td>
+            <td>/token</td>
+            <td>Creates a Token (login)</td>
+            <td>email (string), password (string)</td>
+        </tr>
+    </table>
+
+    <!-- Workspaces Section -->
+    <h2>Workspaces:</h2>
+    <table>
+        <tr>
+            <th>Method</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+            <th>Payload</th>
+            <th>Filters</th>
+        </tr>
+        <tr>
+            <td>POST</td>
+            <td>/workspaces</td>
+            <td>Creates a workspace</td>
+            <td>name (string)</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/workspaces</td>
+            <td>Retrieves all workspace</td>
+            <td>N/A</td>
+            <td>name</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/workspaces/{workspaceId}</td>
+            <td>Retrieves a single workspace</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+        
+        <tr>
+            <td>PUT</td>
+            <td>/workspaces/{workspaceId}</td>
+            <td>Updates a single workspace</td>
+            <td>name (string)</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>DELETE</td>
+            <td>/workspaces/{workspaceId}</td>
+            <td>Deletes a single workspace</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+        
+        <tr>
+            <td>GET</td>
+            <td>/users/{userId}/workspaces</td>
+            <td>Retrieves all workspaces with user</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/users/{userId}/workspaces/{workspaceId}</td>
+            <td>Retrieves a single workspace with user</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+    </table>
+
+    <!-- User Workspaces Section -->
+    <h2>User Workspaces:</h2>
+    <table>
+        <tr>
+            <th>Method</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+            <th>Payload</th>
+            <th>Filters</th>
+        </tr>
+        <tr>
+            <td>POST</td>
+            <td>/userworkspaces</td>
+            <td>Creates a userworkspace</td>
+            <td>user_id (integer), workspace_id (integer), role_id (integer)</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/userworkspaces</td>
+            <td>Retrieves all userworkspace</td>
+            <td>N/A</td>
+            <td>user_id, workspace_id, role_id</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/users/{userId}/workspaces/{workspaceId}/userworkspaces</td>
+            <td>Retrieves a single userworkspace</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/workspaces/{workspaceId}/userworkspaces</td>
+            <td>Retrieves all userworkspace with workspace</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/users/{userId}/userworkspaces</td>
+            <td>Retrieves all userworkspace with user</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>PUT</td>
+            <td>/users/{userId}/workspaces/{workspaceId}/userworkspaces</td>
+            <td>Updates the role of a single userworkspace</td>
+            <td>role_id (integer)</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>DELETE</td>
+            <td>/users/{userId}/workspaces/{workspaceId}/userworkspaces</td>
+            <td>Deletes a single userworkspace</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+    </table>
+
+    <!-- Roles Section -->
+    <h2>Roles:</h2>
+    <table>
+        <tr>
+            <th>Method</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+            <th>Payload</th>
+            <th>Filters</th>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/roles</td>
+            <td>Retrieves all roles</td>
+            <td>N/A</td>
+            <td>name</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/roles/{roleId}</td>
+            <td>Retrieves a single role</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+    </table>
+
+    <!-- Report Types Section -->
+    <h2>Report Types:</h2>
+    <table>
+        <tr>
+            <th>Method</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+            <th>Payload</th>
+            <th>Filters</th>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/report-types</td>
+            <td>Retrieves all report types</td>
+            <td>N/A</td>
+            <td>name</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/report-types/{reportTypeId}</td>
+            <td>Retrieves a single report type</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+    </table>
+
+    <!-- Reports Section -->
+    <h2>Reports:</h2>
+    <table>
+        <tr>
+            <th>Method</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+            <th>Payload</th>
+            <th>Filters</th>
+        </tr>
+        <tr>
+            <td>POST</td>
+            <td>/reports</td>
+            <td>Creates a report in a workspace</td>
+            <td>title, report_type_id, workspace_id</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/reports</td>
+            <td>Retrieves all reports from a workspace</td>
+            <td>N/A</td>
+            <td>title, report_type_id, workspace_id</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/reports/{reportId}</td>
+            <td>Retrieves a single report from a workspace</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>PUT</td>
+            <td>/reports/{reportId}</td>
+            <td>Updates a single report from a workspace</td>
+            <td>title, report_type_id, workspace_id</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>DELETE</td>
+            <td>/reports/{reportId}</td>
+            <td>Deletes a single report from a workspace</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+    </table>
+
+    <!-- Faculty Matrix Section -->
+    <h2>Faculty Matrix:</h2>
+    <table>
+        <tr>
+            <th>Method</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+            <th>Payload</th>
+            <th>Filters</th>
+        </tr>
+        <tr>
+            <td>POST</td>
+            <td>/faculty-matrices</td>
+            <td>Creates a faculty matrix</td>
+            <td>name (string), position (string), tenure (string), status (integer), related_certificate (string),
+                doctorate_degree (string), masters_degree (string), baccalaureate_degree (string), specification
+                (string), enrollment_status (string), designation (string), teaching_experience (integer),
+                organization_membership (string), report_id (integer)</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/faculty-matrices</td>
+            <td>Retrieves all faculty matrices</td>
+            <td>N/A</td>
+            <td>name (string), position (string), tenure (string), status (integer), related_certificate (string),
+                doctorate_degree (string), masters_degree (string), baccalaureate_degree (string), specification
+                (string), enrollment_status (string), designation (string), teaching_experience (integer),
+                organization_membership (string), report_id (integer)</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/faculty-matrices/{facultyMatrixId:\d+}</td>
+            <td>Retrieves a single faculty matrix</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>PUT</td>
+            <td>/faculty-matrices/{facultyMatrixId:\d+}</td>
+            <td>Updates a single faculty matrix</td>
+            <td>name (string), position (string), tenure (string), status (integer), related_certificate (string),
+                doctorate_degree (string), masters_degree (string), baccalaureate_degree (string), specification
+                (string), enrollment_status (string), designation (string), teaching_experience (integer),
+                organization_membership (string), report_id (integer)</td>
+                <td>N/A</td>
+            </tr>
+        <tr>
+            <td>DELETE</td>
+            <td>/faculty-matrices/{facultyMatrixId:\d+}</td>
+            <td>Deletes a faculty matrix</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+    </table>
+
+    <!-- Report Selection Section -->
+    <h2>Report Selection:</h2>
+    <table>
+        <tr>
+            <th>Method</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+            <th>Payload</th>
+            <th>Filters</th>
+        </tr>
+        <tr>
+            <td>POST</td>
+            <td>/report-selections</td>
+            <td>Create a report selection</td>
+            <td>annual_report_id (integer), report_id (integer)</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/report-selections</td>
+            <td>Retrieve all report selections</td>
+            <td>N/A</td>
+            <td>annual_report_id, report_id</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/annual-reports/{annualReportId:\d+}/reports/{reportId:\d+}/report-selections</td>
+            <td>Retrieve report selections for a specific report</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>PUT</td>
+            <td>/annual-reports/{annualReportId:\d+}/reports/{reportId:\d+}/report-selections</td>
+            <td>Update report selections for a specific report</td>
+            <td>annual_report_id (integer), report_id (integer)</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>DELETE</td>
+            <td>/annual-reports/{annualReportId:\d+}/reports/{reportId:\d+}/report-selections</td>
+            <td>Delete report selections for a specific report</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+    </table>
+    <!-- Annual Report Section -->
+    <h2>Annual Report:</h2>
+    <table>
+        <tr>
+            <th>Method</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+            <th>Payload</th>
+            <th>Filters</th>
+        </tr>
+        <tr>
+            <td>POST</td>
+            <td>/annual-reports</td>
+            <td>Creates an annual report</td>
+            <td>title (string), description (string), workspace_id (integer)</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/annual-reports</td>
+            <td>Retrieves all annual reports</td>
+            <td>N/A</td>
+            <td>title, description, workspace_id</td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/annual-reports/{annualReportId:\d+}</td>
+            <td>Retrieves a single annual report</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>PUT</td>
+            <td>/annual-reports/{annualReportId:\d+}</td>
+            <td>Update a single annual report</td>
+            <td>title (string), description (string), workspace_id (integer)</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>DELETE</td>
+            <td>/annual-reports/{annualReportId:\d+}</td>
+            <td>Delete a single annual report</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+    </table>
+
+<!-- Accomplishment Report Section -->
+<h2>Accomplishment Report:</h2>
+<table>
+    <tr>
+        <th>Method</th>
+        <th>Endpoint</th>
+        <th>Description</th>
+        <th>Payload</th>
+        <th>Filters</th>
+    </tr>
+    <tr>
+        <td>POST</td>
+        <td>/accomplishment-reports</td>
+        <td>Creates an accomplishment report</td>
+        <td>title (string), description (string), workspace_id (integer), name_of_activity (string), date_of_activity (date), venue_of_activity (string), nature_of_activity (string), benefits_of_the_participants (string), narrative_report (string), image_name (string), report_id (integer)</td>
+        <td>N/A</td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>/accomplishment-reports</td>
+        <td>Retrieves all accomplishment reports</td>
+        <td>N/A</td>
+        <td>title, description, workspace_id, name_of_activity, date_of_activity, venue_of_activity, nature_of_activity, benefits_of_the_participants</td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>/accomplishment-reports/{accomplishmentReportId:\d+}</td>
+        <td>Retrieves a single accomplishment report</td>
+        <td>N/A</td>
+        <td>N/A</td>
+    </tr>
+    <tr>
+        <td>PUT</td>
+        <td>/accomplishment-reports/{accomplishmentReportId:\d+}</td>
+        <td>Update a single accomplishment report</td>
+        <td>title (string), description (string), workspace_id (integer), name_of_activity (string), date_of_activity (date), venue_of_activity (string), nature_of_activity (string), benefits_of_the_participants (string), narrative_report (string), image_name (string), report_id (integer)</td>
+        <td>N/A</td>
+    </tr>
+    <tr>
+        <td>DELETE</td>
+        <td>/accomplishment-reports/{accomplishmentReportId:\d+}</td>
+        <td>Delete a single accomplishment report</td>
+        <td>N/A</td>
+        <td>N/A</td>
+    </tr>
+</table>
+
+</body>
+
+</html>
