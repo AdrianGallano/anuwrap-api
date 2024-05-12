@@ -14,10 +14,10 @@ class Workspace
 
     function getAllWithUser($id)
     {
-        $queryStr = "SELECT Workspace.*, UserWorkspace.*
-        FROM Workspace
-        JOIN UserWorkspace ON Workspace.workspace_id = UserWorkspace.workspace_id
-        WHERE UserWorkspace.user_id = :id";
+        $queryStr = "SELECT workspace.*, userworkspace.*
+        FROM workspace
+        JOIN userworkspace ON workspace.workspace_id = userworkspace.workspace_id
+        WHERE userworkspace.user_id = :id";
         $stmt = $this->pdo->prepare($queryStr);
         try {
             $stmt->execute(array(
@@ -33,10 +33,10 @@ class Workspace
 
     function getWithUser($user_id, $workspace_id)
     {
-        $queryStr = "SELECT Workspace.*, UserWorkspace.*
-        FROM Workspace
-        JOIN UserWorkspace ON Workspace.workspace_id = UserWorkspace.workspace_id
-        WHERE UserWorkspace.user_id = :user_id AND Workspace.workspace_id = :workspace_id";
+        $queryStr = "SELECT workspace.*, userworkspace.*
+        FROM workspace
+        JOIN userworkspace ON workspace.workspace_id = userworkspace.workspace_id
+        WHERE userworkspace.user_id = :user_id AND workspace.workspace_id = :workspace_id";
         $stmt = $this->pdo->prepare($queryStr);
         try {
             $stmt->execute(array(
@@ -52,7 +52,7 @@ class Workspace
     }
     function get($id)
     {
-        $queryStr = "SELECT * FROM Workspace WHERE workspace_id = :id";
+        $queryStr = "SELECT * FROM workspace WHERE workspace_id = :id";
         $stmt = $this->pdo->prepare($queryStr);
 
         try {
@@ -70,9 +70,9 @@ class Workspace
     function getAll($filterStr = "")
     {
         if ($filterStr == "") {
-            $queryStr = "SELECT * FROM Workspace";
+            $queryStr = "SELECT * FROM workspace";
         } else {
-            $queryStr = "SELECT * FROM Workspace WHERE $filterStr";
+            $queryStr = "SELECT * FROM workspace WHERE $filterStr";
         }
         $stmt = $this->pdo->prepare($queryStr);
 
@@ -90,7 +90,7 @@ class Workspace
     {
         $name = $workspace['name'];
 
-        $queryStr = "INSERT INTO Workspace (name) VALUES (:name)";
+        $queryStr = "INSERT INTO workspace (name) VALUES (:name)";
 
         $stmt = $this->pdo->prepare($queryStr);
 
@@ -108,7 +108,7 @@ class Workspace
     }
     function delete($id)
     {
-        $queryStr = "DELETE FROM Workspace WHERE workspace_id = :id";
+        $queryStr = "DELETE FROM workspace WHERE workspace_id = :id";
 
         $stmt = $this->pdo->prepare($queryStr);
         try {
@@ -126,7 +126,7 @@ class Workspace
     function update($workspace, $id)
     {
         $name = $workspace["name"];
-        $queryStr = "UPDATE Workspace 
+        $queryStr = "UPDATE workspace 
             SET name=:name WHERE workspace_id = :id";
 
         $stmt = $this->pdo->prepare($queryStr);

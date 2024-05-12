@@ -19,7 +19,7 @@ class UserWorkspace
         $role_id = $request["role_id"];
 
         $queryStr = "INSERT INTO 
-        UserWorkspace(user_id, workspace_id, role_id) VALUES
+        userworkspace(user_id, workspace_id, role_id) VALUES
         (:user_id, :workspace_id, :role_id)";
 
         $stmt = $this->pdo->prepare($queryStr);
@@ -43,10 +43,10 @@ class UserWorkspace
 
     function get($user_id, $workspace_id)
     {
-        $queryStr = "SELECT UserWorkspace.*, Workspace.*, User.*, Role.role_id, Role.name as role_name FROM UserWorkspace
-        JOIN Workspace ON UserWorkspace.workspace_id = Workspace.workspace_id
-        JOIN User ON UserWorkspace.user_id = user.user_id
-        JOIN Role ON UserWorkspace.role_id = role.role_id WHERE UserWorkspace.user_id = :user_id AND UserWorkspace.workspace_id = :workspace_id";
+        $queryStr = "SELECT userworkspace.*, workspace.*, user.*, role.role_id, role.name as role_name FROM userworkspace
+        JOIN workspace ON userworkspace.workspace_id = workspace.workspace_id
+        JOIN user ON userworkspace.user_id = user.user_id
+        JOIN role ON userworkspace.role_id = role.role_id WHERE userworkspace.user_id = :user_id AND userworkspace.workspace_id = :workspace_id";
         $stmt = $this->pdo->prepare($queryStr);
 
         try {
@@ -67,15 +67,15 @@ class UserWorkspace
     function getAll($filterStr = "")
     {
         if ($filterStr == "") {
-            $queryStr = "SELECT UserWorkspace.*, Workspace.*, User.*, Role.role_id, Role.name as role_name FROM UserWorkspace
-            JOIN Workspace ON UserWorkspace.workspace_id = Workspace.workspace_id
-            JOIN User ON UserWorkspace.user_id = user.user_id
-            JOIN Role ON UserWorkspace.role_id = role.role_id";
+            $queryStr = "SELECT userworkspace.*, workspace.*, user.*, role.role_id, role.name as role_name FROM userworkspace
+            JOIN workspace ON userworkspace.workspace_id = workspace.workspace_id
+            JOIN user ON userworkspace.user_id = user.user_id
+            JOIN role ON userworkspace.role_id = role.role_id";
         } else {
-            $queryStr = "SELECT UserWorkspace.*, Workspace.*, User.*, Role.role_id, Role.name as role_name FROM UserWorkspace
-            JOIN Workspace ON UserWorkspace.workspace_id = Workspace.workspace_id
-            JOIN User ON UserWorkspace.user_id = user.user_id
-            JOIN Role ON UserWorkspace.role_id = role.role_id WHERE UserWorkspace.$filterStr";
+            $queryStr = "SELECT userworkspace.*, workspace.*, user.*, role.role_id, role.name as role_name FROM userworkspace
+            JOIN workspace ON userworkspace.workspace_id = workspace.workspace_id
+            JOIN user ON userworkspace.user_id = user.user_id
+            JOIN role ON userworkspace.role_id = role.role_id WHERE userworkspace.$filterStr";
         }
 
         $stmt = $this->pdo->prepare($queryStr);
@@ -93,7 +93,7 @@ class UserWorkspace
 
     function getAllWorkspaceWithUser($id)
     {
-        $queryStr = "SELECT * FROM UserWorkspace WHERE user_id = :id";
+        $queryStr = "SELECT * FROM userworkspace WHERE user_id = :id";
         $stmt = $this->pdo->prepare($queryStr);
 
         try {
@@ -111,7 +111,7 @@ class UserWorkspace
     }
     function getAllWorkspaceWithWorkspace($id)
     {
-        $queryStr = "SELECT * FROM UserWorkspace WHERE workspace_id = :id";
+        $queryStr = "SELECT * FROM userworkspace WHERE workspace_id = :id";
         $stmt = $this->pdo->prepare($queryStr);
 
         try {
@@ -129,7 +129,7 @@ class UserWorkspace
     }
     function delete($workspace_id, $user_id)
     {
-        $queryStr = "DELETE FROM UserWorkspace WHERE workspace_id = :workspace_id AND user_id = :user_id";
+        $queryStr = "DELETE FROM userworkspace WHERE workspace_id = :workspace_id AND user_id = :user_id";
 
         $stmt = $this->pdo->prepare($queryStr);
         try {
@@ -149,7 +149,7 @@ class UserWorkspace
     {
         $role_id = $payload["role_id"];
 
-        $queryStr = "UPDATE UserWorkspace 
+        $queryStr = "UPDATE userworkspace 
             SET role_id=:role_id WHERE user_id = :user_id AND workspace_id = :workspace_id";
 
         $stmt = $this->pdo->prepare($queryStr);

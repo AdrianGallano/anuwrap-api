@@ -4,7 +4,7 @@ namespace Src\Models;
 
 use PDOException;
 
-class FacultyMatrix
+class facultymatrix
 {
     private $pdo;
 
@@ -30,7 +30,7 @@ class FacultyMatrix
         $organizationMembership = $request["organization_membership"];
         $reportId = $request["report_id"];
 
-        $queryStr = "INSERT INTO FacultyMatrix (name, position, tenure, status, related_certificate, doctorate_degree, masters_degree, baccalaureate_degree, specification, enrollment_status, designation, teaching_experience, organization_membership, report_id) VALUES (:name, :position, :tenure, :status, :related_certificate, :doctorate_degree, :masters_degree, :baccalaureate_degree, :specification, :enrollment_status, :designation, :teaching_experience, :organization_membership, :report_id)";
+        $queryStr = "INSERT INTO facultymatrix (name, position, tenure, status, related_certificate, doctorate_degree, masters_degree, baccalaureate_degree, specification, enrollment_status, designation, teaching_experience, organization_membership, report_id) VALUES (:name, :position, :tenure, :status, :related_certificate, :doctorate_degree, :masters_degree, :baccalaureate_degree, :specification, :enrollment_status, :designation, :teaching_experience, :organization_membership, :report_id)";
         $stmt = $this->pdo->prepare($queryStr);
 
         try {
@@ -61,7 +61,7 @@ class FacultyMatrix
 
     function get($id)
     {
-        $queryStr = "SELECT * FROM FacultyMatrix WHERE faculty_matrix_id = :id";
+        $queryStr = "SELECT * FROM facultymatrix WHERE faculty_matrix_id = :id";
         $stmt = $this->pdo->prepare($queryStr);
         try {
             $stmt->execute(array(
@@ -78,11 +78,11 @@ class FacultyMatrix
     function getAll($filterStr = "")
     {
         if ($filterStr == "") {
-            $queryStr = "SELECT FacultyMatrix.*, Report.* FROM FacultyMatrix 
-            JOIN REPORT ON FacultyMatrix.report_id = Report.report_id";
+            $queryStr = "SELECT facultymatrix.*, report.* FROM facultymatrix 
+            JOIN REPORT ON facultymatrix.report_id = report.report_id";
         } else {
-            $queryStr = "SELECT FacultyMatrix.*, Report.* FROM FacultyMatrix 
-            JOIN REPORT ON FacultyMatrix.report_id = Report.report_id WHERE FacultyMatrix.$filterStr";
+            $queryStr = "SELECT facultymatrix.*, report.* FROM facultymatrix 
+            JOIN REPORT ON facultymatrix.report_id = report.report_id WHERE facultymatrix.$filterStr";
         }
 
         $stmt = $this->pdo->prepare($queryStr);
@@ -114,7 +114,7 @@ class FacultyMatrix
         $organizationMembership = $request["organization_membership"];
         $reportId = $request["report_id"];
 
-        $queryStr = "UPDATE FacultyMatrix SET name = :name, position = :position, tenure = :tenure, status = :status, related_certificate = :related_certificate, doctorate_degree = :doctorate_degree, masters_degree = :masters_degree, baccalaureate_degree = :baccalaureate_degree, specification = :specification, enrollment_status = :enrollment_status, designation = :designation, teaching_experience = :teaching_experience, organization_membership = :organization_membership, report_id = :report_id WHERE faculty_matrix_id = :id";
+        $queryStr = "UPDATE facultymatrix SET name = :name, position = :position, tenure = :tenure, status = :status, related_certificate = :related_certificate, doctorate_degree = :doctorate_degree, masters_degree = :masters_degree, baccalaureate_degree = :baccalaureate_degree, specification = :specification, enrollment_status = :enrollment_status, designation = :designation, teaching_experience = :teaching_experience, organization_membership = :organization_membership, report_id = :report_id WHERE faculty_matrix_id = :id";
 
         $stmt = $this->pdo->prepare($queryStr);
 
@@ -147,7 +147,7 @@ class FacultyMatrix
 
     function delete($id)
     {
-        $queryStr = "DELETE FROM FacultyMatrix WHERE faculty_matrix_id = :id";
+        $queryStr = "DELETE FROM facultymatrix WHERE faculty_matrix_id = :id";
 
         $stmt = $this->pdo->prepare($queryStr);
         try {

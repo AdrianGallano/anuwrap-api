@@ -15,9 +15,9 @@ class ReportType
     function getAll($filterStr = "")
     {
         if ($filterStr == "") {
-            $queryStr = "SELECT * FROM ReportType";
+            $queryStr = "SELECT * FROM reporttype";
         } else {
-            $queryStr = "SELECT * FROM ReportType WHERE " . $filterStr;
+            $queryStr = "SELECT * FROM reporttype WHERE " . $filterStr;
         }
         $stmt = $this->pdo->prepare($queryStr);
 
@@ -32,7 +32,7 @@ class ReportType
     }
     function get($report_type_id)
     {
-        $queryStr = "SELECT * FROM ReportType WHERE report_type_id = :report_type_id";
+        $queryStr = "SELECT * FROM reporttype WHERE report_type_id = :report_type_id";
         $stmt = $this->pdo->prepare($queryStr);
 
         try {
@@ -51,8 +51,8 @@ class ReportType
 
 /*     function get($id)
     {
-        $queryStr = "SELECT Report.*, ReportType.* FROM Report 
-        JOIN ReportType ON Report.report_type_id = ReportType.report_type_id 
+        $queryStr = "SELECT Report.*, reporttype.* FROM Report 
+        JOIN reporttype ON Report.report_type_id = reporttype.report_type_id 
         WHERE Report.report_id = :id";
         
         $stmt = $this->pdo->prepare($queryStr);
@@ -72,8 +72,8 @@ class ReportType
 
 /*     function getAll($workspace_id)
     {
-        $queryStr = "SELECT Report.*, ReportType.* FROM Report 
-        JOIN ReportType ON Report.report_type_id = ReportType.report_type_id 
+        $queryStr = "SELECT Report.*, reporttype.* FROM Report 
+        JOIN reporttype ON Report.report_type_id = reporttype.report_type_id 
         WHERE Report.workspace_id = :workspace_id";
 
         $stmt = $this->pdo->prepare($queryStr);

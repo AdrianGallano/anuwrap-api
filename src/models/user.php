@@ -60,7 +60,7 @@ class User
         $status = $user['status'];
         $image_name = $user['image_name'];
 
-        $queryStr = "INSERT INTO User (username, first_name, last_name, email, password,status, image_name) 
+        $queryStr = "INSERT INTO user (username, first_name, last_name, email, password,status, image_name) 
         VALUES (:username, :first_name, :last_name, :email, :password, :status, :image_name)";
 
         $stmt = $this->pdo->prepare($queryStr);

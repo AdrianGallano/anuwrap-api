@@ -15,9 +15,9 @@ class Role
     function getAll($filterStr = "")
     {
         if ($filterStr == "") {
-            $queryStr = "SELECT * FROM Role";
+            $queryStr = "SELECT * FROM role";
         } else {
-            $queryStr = "SELECT * FROM Role WHERE $filterStr";
+            $queryStr = "SELECT * FROM role WHERE $filterStr";
         }
         $stmt = $this->pdo->prepare($queryStr);
         try {
@@ -32,7 +32,7 @@ class Role
 
     function get($id)
     {
-        $queryStr = "SELECT * FROM Role WHERE role_id = :id";
+        $queryStr = "SELECT * FROM role WHERE role_id = :id";
         $stmt = $this->pdo->prepare($queryStr);
 
         try {
