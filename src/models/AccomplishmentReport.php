@@ -15,11 +15,11 @@ class AccomplishmentReport
 
     function getAll($filterStr = "")
     {
-        $queryStr = "SELECT AccomplishmentReport.*, report.* FROM accomplishmentreport 
-        JOIN report ON accomplishmentreport.report_id = report.report_id";
+        $queryStr = "SELECT AccomplishmentReport.*, Report.* FROM AccomplishmentReport 
+        JOIN Report ON AccomplishmentReport.report_id = Report.report_id";
 
         if ($filterStr !== "") {
-            $queryStr .= " WHERE accomplishmentreport.$filterStr";
+            $queryStr .= " WHERE AccomplishmentReport.$filterStr";
         }
 
         $stmt = $this->pdo->prepare($queryStr);
@@ -44,7 +44,7 @@ class AccomplishmentReport
         $image_name = $request['image_name'];
         $report_id = $request['report_id'];
 
-        $queryStr = "INSERT INTO accomplishmentreport (name_of_activity, date_of_activity, venue_of_activity, nature_of_activity, benefits_of_the_participants, narrative_report, image_name, report_id) VALUES (:name_of_activity, :date_of_activity, :venue_of_activity, :nature_of_activity, :benefits_of_the_participants, :narrative_report, :image_name, :report_id)";
+        $queryStr = "INSERT INTO AccomplishmentReport (name_of_activity, date_of_activity, venue_of_activity, nature_of_activity, benefits_of_the_participants, narrative_report, image_name, report_id) VALUES (:name_of_activity, :date_of_activity, :venue_of_activity, :nature_of_activity, :benefits_of_the_participants, :narrative_report, :image_name, :report_id)";
 
         $stmt = $this->pdo->prepare($queryStr);
 
@@ -70,7 +70,7 @@ class AccomplishmentReport
 
     function get($id)
     {
-        $queryStr = "SELECT * FROM accomplishmentreport WHERE accomplishment_report_id = :id";
+        $queryStr = "SELECT * FROM AccomplishmentReport WHERE accomplishment_report_id = :id";
         $stmt = $this->pdo->prepare($queryStr);
 
         try {
@@ -96,7 +96,7 @@ class AccomplishmentReport
         $image_name = $request['image_name'];
         $report_id = $request['report_id'];
 
-        $queryStr = "UPDATE accomplishmentreport SET name_of_activity = :name_of_activity, date_of_activity = :date_of_activity, venue_of_activity = :venue_of_activity, nature_of_activity = :nature_of_activity, benefits_of_the_participants = :benefits_of_the_participants, narrative_report = :narrative_report, image_name = :image_name, report_id = :report_id WHERE accomplishment_report_id = :id";
+        $queryStr = "UPDATE AccomplishmentReport SET name_of_activity = :name_of_activity, date_of_activity = :date_of_activity, venue_of_activity = :venue_of_activity, nature_of_activity = :nature_of_activity, benefits_of_the_participants = :benefits_of_the_participants, narrative_report = :narrative_report, image_name = :image_name, report_id = :report_id WHERE accomplishment_report_id = :id";
 
         $stmt = $this->pdo->prepare($queryStr);
 
@@ -123,7 +123,7 @@ class AccomplishmentReport
 
     function delete($id)
     {
-        $queryStr = "DELETE FROM accomplishmentreport WHERE accomplishment_report_id = :id";
+        $queryStr = "DELETE FROM AccomplishmentReport WHERE accomplishment_report_id = :id";
 
         $stmt = $this->pdo->prepare($queryStr);
 

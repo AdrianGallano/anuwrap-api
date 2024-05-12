@@ -18,7 +18,7 @@ class AnnualReport
         $description = $request["description"];
         $workspace_id = $request["workspace_id"];
 
-        $queryStr = "INSERT INTO annualreport (annualreport_title, description, workspace_id) VALUES (:annualreport_title, :description, :workspace_id)";
+        $queryStr = "INSERT INTO AnnualReport (annualreport_title, description, workspace_id) VALUES (:annualreport_title, :description, :workspace_id)";
         $stmt = $this->pdo->prepare($queryStr);
 
         try {
@@ -37,7 +37,7 @@ class AnnualReport
     }
     function get($annual_report_id)
     {
-        $queryStr = "SELECT * FROM annualreport WHERE annual_report_id = :annual_report_id";
+        $queryStr = "SELECT * FROM AnnualReport WHERE annual_report_id = :annual_report_id";
 
         $stmt = $this->pdo->prepare($queryStr);
         try {
@@ -52,9 +52,9 @@ class AnnualReport
     function getAll($filterStr = "")
     {
         if ($filterStr == "") {
-            $queryStr = "SELECT * FROM annualreport";
+            $queryStr = "SELECT * FROM AnnualReport";
         } else {
-            $queryStr = "SELECT * FROM annualreport WHERE $filterStr";
+            $queryStr = "SELECT * FROM AnnualReport WHERE $filterStr";
         }
 
         $stmt = $this->pdo->prepare($queryStr);
@@ -69,7 +69,7 @@ class AnnualReport
 
     function delete($annual_report_id)
     {
-        $queryStr = "DELETE FROM annualreport WHERE annual_report_id = :annual_report_id";
+        $queryStr = "DELETE FROM AnnualReport WHERE annual_report_id = :annual_report_id";
 
         $stmt = $this->pdo->prepare($queryStr);
         try {
@@ -86,7 +86,7 @@ class AnnualReport
         $description = $request["description"];
         $workspace_id = $request["workspace_id"];
 
-        $queryStr = "UPDATE annualreport SET annualreport_title = :annualreport_title, description = :description, workspace_id = :workspace_id WHERE annual_report_id = :annual_report_id";
+        $queryStr = "UPDATE AnnualReport SET annualreport_title = :annualreport_title, description = :description, workspace_id = :workspace_id WHERE annual_report_id = :annual_report_id";
         $stmt = $this->pdo->prepare($queryStr);
 
         try {

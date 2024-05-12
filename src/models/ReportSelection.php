@@ -19,7 +19,7 @@ class ReportSelection
         $annual_report_id = $request["annual_report_id"];
         $report_id = $request["report_id"];
 
-        $queryStr = "INSERT INTO reportselection(annual_report_id, report_id) VALUES (:annual_report_id, :report_id)";
+        $queryStr = "INSERT INTO ReportSelection(annual_report_id, report_id) VALUES (:annual_report_id, :report_id)";
         $stmt = $this->pdo->prepare($queryStr);
 
         try {
@@ -42,15 +42,15 @@ class ReportSelection
     function getAll($filterStr = "")
     {
         if ($filterStr == "") {
-            $queryStr = "SELECT reportselection.*, annualreport.*, report.* FROM reportselection
-            JOIN annualreport ON reportselection.annual_report_id = annualreport.annual_report_id
-            JOIN report ON reportselection.report_id = report.report_id";
+            $queryStr = "SELECT ReportSelection.*, AnnualReport.*, Report.* FROM ReportSelection
+            JOIN AnnualReport ON ReportSelection.annual_report_id = AnnualReport.annual_report_id
+            JOIN Report ON ReportSelection.report_id = Report.report_id";
 
 
         } else {
-            $queryStr = "SELECT reportselection.*, annualreport.*, report.* FROM reportselection
-            JOIN annualreport ON reportselection.annual_report_id = annualreport.annual_report_id
-            JOIN report ON reportselection.report_id = report.report_id WHERE reportselection.$filterStr";
+            $queryStr = "SELECT ReportSelection.*, AnnualReport.*, Report.* FROM ReportSelection
+            JOIN AnnualReport ON ReportSelection.annual_report_id = AnnualReport.annual_report_id
+            JOIN Report ON ReportSelection.report_id = Report.report_id WHERE ReportSelection.$filterStr";
         }
         $stmt = $this->pdo->prepare($queryStr);
 
@@ -68,7 +68,7 @@ class ReportSelection
 
     function get($annual_report_id, $report_id)
     {
-        $queryStr = "SELECT * FROM reportselection WHERE annual_report_id = :annual_report_id AND report_id = :report_id";
+        $queryStr = "SELECT * FROM ReportSelection WHERE annual_report_id = :annual_report_id AND report_id = :report_id";
         $stmt = $this->pdo->prepare($queryStr);
         try {
             $stmt->execute(array(
@@ -85,7 +85,7 @@ class ReportSelection
 
     function delete($annual_report_id, $report_id)
     {
-        $queryStr = "DELETE FROM reportselection WHERE annual_report_id = :annual_report_id AND report_id = :report_id";
+        $queryStr = "DELETE FROM ReportSelection WHERE annual_report_id = :annual_report_id AND report_id = :report_id";
         $stmt = $this->pdo->prepare($queryStr);
         try {
             $stmt->execute(array(
@@ -104,7 +104,7 @@ class ReportSelection
         $new_annual_report_id = $request["annual_report_id"];
         $new_report_id = $request["report_id"];
         
-        $queryStr = "UPDATE reportselection SET annual_report_id = :new_annual_report_id, report_id = :new_report_id WHERE annual_report_id = :annual_report_id AND report_id = :report_id";
+        $queryStr = "UPDATE ReportSelection SET annual_report_id = :new_annual_report_id, report_id = :new_report_id WHERE annual_report_id = :annual_report_id AND report_id = :report_id";
         $stmt = $this->pdo->prepare($queryStr);
         try {
             $stmt->execute(

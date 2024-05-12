@@ -11,7 +11,7 @@ class Authentication
     }
     function get($key, $val)
     {
-        $queryStr = "SELECT * FROM user WHERE $key=:$key";
+        $queryStr = "SELECT * FROM User WHERE $key=:$key";
         $stmt = $this->pdo->prepare($queryStr);
 
         $stmt->execute(array(

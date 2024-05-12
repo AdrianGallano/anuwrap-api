@@ -13,7 +13,7 @@ class Report
     }
     function get($id)
     {
-        $queryStr = "SELECT * FROM report WHERE report_id = :id";
+        $queryStr = "SELECT * FROM Report WHERE report_id = :id";
 
         $stmt = $this->pdo->prepare($queryStr);
 
@@ -33,9 +33,9 @@ class Report
     function getAll($filter = "")
     {
         if($filter == ""){
-            $queryStr = "SELECT * FROM report";
+            $queryStr = "SELECT * FROM Report";
         }else{
-            $queryStr = "SELECT * FROM report WHERE $filter";
+            $queryStr = "SELECT * FROM Report WHERE $filter";
         }
 
         $stmt = $this->pdo->prepare($queryStr);
@@ -57,7 +57,7 @@ class Report
         $workspace_id = $request["workspace_id"];
 
         $queryStr = "INSERT INTO 
-        report(title, report_type_id, workspace_id) VALUES
+        Report(title, report_type_id, workspace_id) VALUES
         (:title, :report_type_id, :workspace_id)";
 
         $stmt = $this->pdo->prepare($queryStr);
@@ -78,7 +78,7 @@ class Report
 
     function delete($id)
     {
-        $queryStr = "DELETE FROM report WHERE report_id = :id";
+        $queryStr = "DELETE FROM Report WHERE report_id = :id";
 
         $stmt = $this->pdo->prepare($queryStr);
         try {
@@ -99,7 +99,7 @@ class Report
         $report_type_id = $request["report_type_id"];
         $workspace_id = $request["workspace_id"];
 
-        $queryStr = "UPDATE report 
+        $queryStr = "UPDATE Report 
             SET title=:title, report_type_id=:report_type_id, workspace_id=:workspace_id WHERE report_id = :id";
 
         $stmt = $this->pdo->prepare($queryStr);
