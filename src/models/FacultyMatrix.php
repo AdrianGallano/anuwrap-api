@@ -79,18 +79,19 @@ class FacultyMatrix
     {
         if ($filterStr == "") {
             $queryStr = "SELECT FacultyMatrix.*, Report.* FROM FacultyMatrix 
-            JOIN REPORT ON FacultyMatrix.report_id = Report.report_id";
+            JOIN Report ON FacultyMatrix.report_id = Report.report_id";
         } else {
             $queryStr = "SELECT FacultyMatrix.*, Report.* FROM FacultyMatrix 
-            JOIN REPORT ON FacultyMatrix.report_id = Report.report_id WHERE FacultyMatrix.$filterStr";
+            JOIN Report ON FacultyMatrix.report_id = Report.report_id WHERE FacultyMatrix.$filterStr";
         }
 
-        $stmt = $this->pdo->prepare($queryStr);
         try {
+            $stmt = $this->pdo->prepare($queryStr);
             $stmt->execute();
             $facultyMatrix = $stmt->fetchAll();
             return $facultyMatrix;
         } catch (PDOException $e) {
+            var_dump($e);
             error_log($e->getMessage());
             return null;
         }

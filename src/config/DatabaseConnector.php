@@ -5,7 +5,6 @@ namespace Src\Config;
 use PDO;
 
 date_default_timezone_set("Asia/Manila");
-set_time_limit(1000);
 
 class DatabaseConnector
 {

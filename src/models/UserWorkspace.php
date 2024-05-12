@@ -45,8 +45,8 @@ class UserWorkspace
     {
         $queryStr = "SELECT UserWorkspace.*, Workspace.*, User.*, Role.role_id, Role.name as role_name FROM UserWorkspace
         JOIN Workspace ON UserWorkspace.workspace_id = Workspace.workspace_id
-        JOIN User ON UserWorkspace.user_id = user.user_id
-        JOIN Role ON UserWorkspace.role_id = role.role_id WHERE UserWorkspace.user_id = :user_id AND UserWorkspace.workspace_id = :workspace_id";
+        JOIN User ON UserWorkspace.user_id = User.user_id
+        JOIN Role ON UserWorkspace.role_id = Role.role_id WHERE UserWorkspace.user_id = :user_id AND UserWorkspace.workspace_id = :workspace_id";
         $stmt = $this->pdo->prepare($queryStr);
 
         try {
@@ -69,23 +69,24 @@ class UserWorkspace
         if ($filterStr == "") {
             $queryStr = "SELECT UserWorkspace.*, Workspace.*, User.*, Role.role_id, Role.name as role_name FROM UserWorkspace
             JOIN Workspace ON UserWorkspace.workspace_id = Workspace.workspace_id
-            JOIN User ON UserWorkspace.user_id = user.user_id
-            JOIN Role ON UserWorkspace.role_id = role.role_id";
+            JOIN User ON UserWorkspace.user_id = User.user_id
+            JOIN Role ON UserWorkspace.role_id = Role.role_id";
         } else {
+            
             $queryStr = "SELECT UserWorkspace.*, Workspace.*, User.*, Role.role_id, Role.name as role_name FROM UserWorkspace
             JOIN Workspace ON UserWorkspace.workspace_id = Workspace.workspace_id
-            JOIN User ON UserWorkspace.user_id = user.user_id
-            JOIN Role ON UserWorkspace.role_id = role.role_id WHERE UserWorkspace.$filterStr";
+            JOIN User ON UserWorkspace.user_id = User.user_id
+            JOIN Role ON UserWorkspace.role_id = Role.role_id WHERE UserWorkspace.$filterStr";
         }
 
-        $stmt = $this->pdo->prepare($queryStr);
 
         try {
+            $stmt = $this->pdo->prepare($queryStr);
             $stmt->execute();
             $workspace = $stmt->fetchAll();
-
             return $workspace;
         } catch (PDOException $e) {
+            var_dump($e);
             error_log($e->getMessage());
             return null;
         }
