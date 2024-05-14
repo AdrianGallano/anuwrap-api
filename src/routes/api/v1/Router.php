@@ -30,6 +30,7 @@ class Router
             $r->addRoute('GET', '/users/{userId:\d+}', [UserController::class, 'getUser']);
             $r->addRoute('PATCH', '/users/{userId:\d+}', [UserController::class, 'updateUser']);
             $r->addRoute('DELETE', '/users/{userId:\d+}', [UserController::class, 'deleteUser']);
+            $r->addRoute('POST', '/users/{userId:\d+}/avatar', [UserController::class, 'uploadAvatar']);
 
             /* tokens */
             $r->addRoute('POST', '/token', [TokenController::class, 'postToken']);

@@ -88,7 +88,7 @@ class UserService
 
         $filterStr = $this->filter->getFilterStr();
 
-        if(str_contains($filterStr, "unavailable") || str_contains($filterStr, "empty")){
+        if (str_contains($filterStr, "unavailable") || str_contains($filterStr, "empty")) {
             return Response::payload(400, false, $filterStr);
         }
 
@@ -141,6 +141,17 @@ class UserService
         return $updated_user ? Response::payload(200, true, "Update successful", array("user" => $this->userModel->get($id)))
             : Response::payload(400, False, message: "Contact administrator (adriangallanomain@gmail.com)",);
     }
+
+    function uploadAvatar($userId, $files)
+    {
+        $matches = $this->tokenService->isTokenMatch($userId);
+        if (!$matches) {
+            return Response::payload(401, false, "unauthorized access");
+        }
+
+        $this->userModel->uploadAvatar($userId, $files);
+        return Response::payload(200, true, "Image uploaded successfully", array("user" => $this->userModel->get($userId)));
+    }
     function validate($user)
     {
         $errors = array();
@@ -177,6 +188,7 @@ class UserService
 
         return $errors;
     }
+
     function UsernameExist($username)
     {
         $username = $this->authenticationModel->get("username", $username);

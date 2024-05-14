@@ -3,7 +3,7 @@
 namespace Src\Models;
 
 use PDOException;
-
+use Exception;
 class User
 {
     private $pdo;
@@ -58,7 +58,7 @@ class User
         $email = $user['email'];
         $password = $user['password'];
         $status = $user['status'];
-        $image_name = $user['image_name'];
+        $image_name = "";
 
         $queryStr = "INSERT INTO User (username, first_name, last_name, email, password,status, image_name) 
         VALUES (:username, :first_name, :last_name, :email, :password, :status, :image_name)";
@@ -84,16 +84,46 @@ class User
         }
     }
 
+    function uploadAvatar($id, $files)
+    {
+        $base_directory = getcwd() . "/../uploads/user_avatar/";
+        $target_file = $base_directory . basename($id . "_" . $files['image']['name']);
+
+        try{
+            move_uploaded_file($files['image']['tmp_name'], $target_file);
+        }catch(Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+        
+        $queryStr = "UPDATE User 
+        SET image_name=:image_name
+        WHERE user_id = :id";
+
+        try {
+            $stmt = $this->pdo->prepare($queryStr);
+            $stmt->execute(
+                array(
+                    "image_name" => $target_file,
+                    "id" => $id
+                )
+            );
+            return $id;
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }   
+
     function update($id, $request)
     {
         $first_name = $request['first_name'];
         $last_name = $request['last_name'];
         $status = $request['status'];
-        $image_name = $request['image_name'];
-        
+
         $queryStr = "UPDATE User 
         SET first_name=:first_name,
-        last_name=:last_name, status=:status, image_name=:image_name
+        last_name=:last_name, status=:status
         WHERE user_id = :id";
 
         try {
@@ -103,7 +133,6 @@ class User
                     "first_name" => $first_name,
                     "last_name" => $last_name,
                     "status" => $status,
-                    "image_name" => $image_name,
                     "id" => $id
                 )
             );

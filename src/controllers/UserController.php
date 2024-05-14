@@ -69,4 +69,16 @@ class UserController
         }
         echo json_encode($payload);
     }
+
+    function uploadAvatar($request){
+        $payload = $this->userService->uploadAvatar($request["userId"], $_FILES);
+
+
+        if (array_key_exists("code", $payload)) {
+            http_response_code($payload["code"]);
+            unset($payload["code"]);
+        }
+
+        echo json_encode($payload);
+    }
 }
