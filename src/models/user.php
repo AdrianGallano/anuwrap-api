@@ -86,7 +86,8 @@ class User
 
     function uploadAvatar($id, $files)
     {
-        $base_directory = getcwd() . "/../uploads/user_avatar/";
+        $base_directory = "../uploads/user_avatar/"; 
+        # addsite url here eg. https://saddlebrown-hyena-720529.hostingersite.com/anuwrap-api/public/../uploads/user_avatar/3_exit.png
         $target_file = $base_directory . basename($id . "_" . $files['image']['name']);
 
         try{
