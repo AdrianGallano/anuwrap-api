@@ -12,9 +12,8 @@ use Src\Controllers\UserWorkspaceController;
 use Src\Controllers\DocumentationController;
 use Src\Controllers\RoleController;
 use Src\Controllers\ReportTypeController;
-use Src\Controllers\FacultyMatrixController;
 use Src\Controllers\ReportSelectionController;
-use Src\Controllers\AccomplishmentReportController;
+use Src\Controllers\ContentController;
 
 class Router
 {
@@ -68,13 +67,6 @@ class Router
             $r->addRoute('GET', '/roles', [RoleController::class, 'getAllRole']);
             $r->addRoute('GET', '/roles/{roleId:\d+}', [RoleController::class, 'getRole']);
 
-            /* faculty matrices */
-            $r->addRoute('POST', '/faculty-matrices', [FacultyMatrixController::class, 'createFacultyMatrix']);
-            $r->addRoute('GET', '/faculty-matrices', [FacultyMatrixController::class, 'getAllFacultyMatrix']);
-            $r->addRoute('GET', '/faculty-matrices/{facultyMatrixId:\d+}', [FacultyMatrixController::class, 'getFacultyMatrix']);
-            $r->addRoute('PUT', '/faculty-matrices/{facultyMatrixId:\d+}', [FacultyMatrixController::class, 'updateFacultyMatrix']);
-            $r->addRoute('DELETE', '/faculty-matrices/{facultyMatrixId:\d+}', [FacultyMatrixController::class, 'deleteFacultyMatrix']);
-
             /* report selections */
             $r->addRoute('POST', '/report-selections', [ReportSelectionController::class, 'createReportSelection']);
             $r->addRoute('GET', '/report-selections', [ReportSelectionController::class, 'getAllReportSelection']);
@@ -89,12 +81,12 @@ class Router
             $r->addRoute('PUT', '/annual-reports/{annualReportId:\d+}', [AnnualReportController::class, 'updateAnnualReport']);
             $r->addRoute('DELETE', '/annual-reports/{annualReportId:\d+}', [AnnualReportController::class, 'deleteAnnualReport']);
             
-            /* accomplishment report */
-            $r->addRoute('POST', '/accomplishment-reports', [AccomplishmentReportController::class, 'createAccomplishmentReport']);
-            $r->addRoute('GET', '/accomplishment-reports', [AccomplishmentReportController::class, 'getAllAccomplishmentReport']);
-            $r->addRoute('GET', '/accomplishment-reports/{accomplishmentReportId:\d+}', [AccomplishmentReportController::class, 'getAccomplishmentReport']);
-            $r->addRoute('PUT', '/accomplishment-reports/{accomplishmentReportId:\d+}', [AccomplishmentReportController::class, 'updateAccomplishmentReport']);
-            $r->addRoute('DELETE', '/accomplishment-reports/{accomplishmentReportId:\d+}', [AccomplishmentReportController::class, 'deleteAccomplishmentReport']);
+            /* content */
+            $r->addRoute('POST', '/content', [ContentController::class, 'createContent']);
+            $r->addRoute('GET', '/content', [ContentController::class, 'getAllContent']);
+            $r->addRoute('GET', '/content/{contentId:\d+}', [ContentController::class, 'getContent']);
+            $r->addRoute('DELETE', '/content/{contentId:\d+}', [ContentController::class, 'deleteContent']);
+            $r->addRoute('PUT', '/content/{contentId:\d+}', [ContentController::class, 'updateContent']);
         });
     }
 
