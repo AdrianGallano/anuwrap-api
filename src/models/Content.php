@@ -16,16 +16,14 @@ class Content
     {
         $body = $request["body"];
         $report_id = $request["report_id"];
-        $report_type_id = $request["report_type_id"];
 
-        $queryStr = "INSERT INTO Content(body, report_id, report_type_id) VALUES (:body, :report_id, :report_type_id)";
+        $queryStr = "INSERT INTO Content(body, report_id) VALUES (:body, :report_id)";
         $stmt = $this->pdo->prepare($queryStr);
 
         try {
             $stmt->execute(array(
                 "body" => $body,
                 "report_id" => $report_id,
-                "report_type_id" => $report_type_id
             ));
             return $this->pdo->lastInsertId();
         } catch (PDOException $e) {
@@ -36,7 +34,7 @@ class Content
 
     function get($contentId)
     {
-        $queryStr = "SELECT * FROM Content WHERE id = :id";
+        $queryStr = "SELECT * FROM Content WHERE content_id = :id";
         $stmt = $this->pdo->prepare($queryStr);
 
         try{
@@ -74,16 +72,14 @@ class Content
     {
         $body = $request["body"];
         $report_id = $request["report_id"];
-        $report_type_id = $request["report_type_id"];
 
-        $queryStr = "UPDATE Content SET body = :body, report_id = :report_id, report_type_id = :report_type_id WHERE id = :id";
+        $queryStr = "UPDATE Content SET body = :body, report_id = :report_id WHERE content_id = :id";
         $stmt = $this->pdo->prepare($queryStr);
 
         try{
             $stmt->execute(array(
                 "body" => $body,
                 "report_id" => $report_id,
-                "report_type_id" => $report_type_id,
                 "id" => $contentId
             ));
             return true;
@@ -95,7 +91,7 @@ class Content
 
     function delete($contentId)
     {
-        $queryStr = "DELETE FROM Content WHERE id = :id";
+        $queryStr = "DELETE FROM Content WHERE content_id = :id";
         $stmt = $this->pdo->prepare($queryStr);
 
         try{

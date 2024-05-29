@@ -82,7 +82,7 @@ class Router
             $r->addRoute('DELETE', '/annual-reports/{annualReportId:\d+}', [AnnualReportController::class, 'deleteAnnualReport']);
             
             /* content */
-            $r->addRoute('POST', '/contents', [ContentController::class, 'createContent']);
+            $r->addRoute('POST', '/contents', [ContentController::class, 'postContent']);
             $r->addRoute('GET', '/contents', [ContentController::class, 'getAllContent']);
             $r->addRoute('GET', '/contents/{contentId:\d+}', [ContentController::class, 'getContent']);
             $r->addRoute('DELETE', '/contents/{contentId:\d+}', [ContentController::class, 'deleteContent']);
