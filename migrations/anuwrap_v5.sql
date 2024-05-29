@@ -49,12 +49,15 @@ CREATE TABLE IF NOT EXISTS CollageImage (
 CREATE TABLE IF NOT EXISTS Report (
     report_id int(10) UNSIGNED NOT NULL AUTO_INCREMENT, 
     title varchar(100) NOT NULL, 
+    report_type_id int(10) UNSIGNED DEFAULT NULL, 
     workspace_id int(10) UNSIGNED DEFAULT NULL, 
     date_modified timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(), 
     date_created timestamp NOT NULL DEFAULT current_timestamp(), 
+
     PRIMARY KEY (report_id), 
     KEY workspace_id (workspace_id), 
     KEY title (title),
+    CONSTRAINT FK_report_report_type FOREIGN KEY (report_type_id) REFERENCES ReportType (report_type_id) ON DELETE CASCADE ON UPDATE CASCADE
     CONSTRAINT FK_report_workspace FOREIGN KEY (workspace_id) REFERENCES Workspace (workspace_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
@@ -106,11 +109,9 @@ CREATE TABLE IF NOT EXISTS Content (
     content_id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
     body TEXT,
     report_id INT(10) UNSIGNED NOT NULL, 
-    report_type_id int(10) UNSIGNED DEFAULT NULL, 
     PRIMARY KEY (content_id),
     KEY report_id (report_id),
     CONSTRAINT FK_content_report FOREIGN KEY (report_id) REFERENCES Report (report_id) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT FK_report_report_type FOREIGN KEY (report_type_id) REFERENCES ReportType (report_type_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 INSERT IGNORE INTO Role (role_id, name)

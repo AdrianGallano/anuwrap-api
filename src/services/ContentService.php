@@ -22,7 +22,7 @@ class ContentService
         $this->pdo = (new DatabaseConnector())->getConnection();
         $this->contentModel = new Content($this->pdo);
         $this->tokenService = new TokenService();
-        $this->filter = new Filter("body", "report_id", "report_type_id");
+        $this->filter = new Filter("body", "report_id");
     }
 
 
@@ -35,11 +35,11 @@ class ContentService
             return Response::payload(404, false, "unauthorized access");
         }
 
-        if (!Checker::isFieldExist($request, ["body", "report_id", "report_type_id"])) {
+        if (!Checker::isFieldExist($request, ["body", "report_id"])) {
             return Response::payload(
                 400,
                 false,
-                "body, report_id, and report_type_id is required"
+                "body, and report_id is required"
             );
         }
 
@@ -116,11 +116,11 @@ class ContentService
             return Response::payload(404, false, "unauthorized access");
         }
 
-        if (!Checker::isFieldExist($request, ["body", "report_id", "report_type_id"])) {
+        if (!Checker::isFieldExist($request, ["body", "report_id"])) {
             return Response::payload(
                 400,
                 false,
-                "body, report_id, and report_type_id is required"
+                "body, and report_id is required"
             );
         }
 

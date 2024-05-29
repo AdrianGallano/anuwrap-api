@@ -2,7 +2,6 @@
 
 namespace Src\Services;
 
-use Src\Models\Authentication;
 use Src\Models\Report;
 use Src\Config\DatabaseConnector;
 use Src\Utils\Checker;
