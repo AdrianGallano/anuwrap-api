@@ -26,7 +26,7 @@ class ContentService
     }
 
 
-    function create($request)
+    function createContent($request)
     {
 
         $token = $this->tokenService->readEncodedToken();
@@ -57,7 +57,7 @@ class ContentService
         ) : Response::payload(400, False, message: "Contact administrator (adriangallanomain@gmail.com)");
     }
 
-    function get($contentId)
+    function getContent($contentId)
     {
         $token = $this->tokenService->readEncodedToken();
 
@@ -79,7 +79,7 @@ class ContentService
         ) : Response::payload(400, False, message: "Contact administrator (adriangallanomain@gmail.com)",);
     }
 
-    function getAll()
+    function getAllContent()
     {
         $token = $this->tokenService->readEncodedToken();
 
@@ -108,7 +108,7 @@ class ContentService
         ) : Response::payload(400, False, message: "Contact administrator (adriangallanomain@gmail.com)",);
     }
 
-    function update($contentId, $request)
+    function updateContent($contentId, $request)
     {
         $token = $this->tokenService->readEncodedToken();
 
@@ -138,7 +138,7 @@ class ContentService
         ) : Response::payload(400, False, message: "Contact administrator (adriangallanomain@gmail.com)");
     }
 
-    function delete($contentId)
+    function deleteContent($contentId)
     {
         $token = $this->tokenService->readEncodedToken();
 
