@@ -82,11 +82,11 @@ class Router
             $r->addRoute('DELETE', '/annual-reports/{annualReportId:\d+}', [AnnualReportController::class, 'deleteAnnualReport']);
             
             /* content */
-            $r->addRoute('POST', '/content', [ContentController::class, 'createContent']);
-            $r->addRoute('GET', '/content', [ContentController::class, 'getAllContent']);
-            $r->addRoute('GET', '/content/{contentId:\d+}', [ContentController::class, 'getContent']);
-            $r->addRoute('DELETE', '/content/{contentId:\d+}', [ContentController::class, 'deleteContent']);
-            $r->addRoute('PUT', '/content/{contentId:\d+}', [ContentController::class, 'updateContent']);
+            $r->addRoute('POST', '/contents', [ContentController::class, 'createContent']);
+            $r->addRoute('GET', '/contents', [ContentController::class, 'getAllContent']);
+            $r->addRoute('GET', '/contents/{contentId:\d+}', [ContentController::class, 'getContent']);
+            $r->addRoute('DELETE', '/contents/{contentId:\d+}', [ContentController::class, 'deleteContent']);
+            $r->addRoute('PUT', '/contents/{contentId:\d+}', [ContentController::class, 'updateContent']);
         });
     }
 

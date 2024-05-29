@@ -55,9 +55,7 @@ CREATE TABLE IF NOT EXISTS Report (
     PRIMARY KEY (report_id), 
     KEY workspace_id (workspace_id), 
     KEY title (title),
-    CONSTRAINT FK_report_workspace FOREIGN KEY (workspace_id) REFERENCES Workspace (workspace_id) ON DELETE CASCADE ON UPDATE CASCADE,
-
-
+    CONSTRAINT FK_report_workspace FOREIGN KEY (workspace_id) REFERENCES Workspace (workspace_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 CREATE TABLE IF NOT EXISTS ReportSelection (
@@ -81,7 +79,7 @@ CREATE TABLE IF NOT EXISTS User (
     username varchar(50) NOT NULL,
     first_name varchar(50) NOT NULL,
     last_name varchar(50) NOT NULL,
-    email tinytext NOT NULL,
+    email varchar(255) NOT NULL,
     password varchar(60) NOT NULL,
     status TINYINT(1) NOT NULL,
     image_name TEXT NOT NULL,
@@ -105,25 +103,21 @@ CREATE TABLE IF NOT EXISTS UserWorkspace (
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 CREATE TABLE IF NOT EXISTS Content (
-    content_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    content_id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
     body TEXT,
     report_id INT(10) UNSIGNED NOT NULL, 
     report_type_id int(10) UNSIGNED DEFAULT NULL, 
-    PRIMARY KEY (content_id), KEY
+    PRIMARY KEY (content_id),
+    KEY report_id (report_id),
+    CONSTRAINT FK_content_report FOREIGN KEY (report_id) REFERENCES Report (report_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT FK_report_report_type FOREIGN KEY (report_type_id) REFERENCES ReportType (report_type_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
-    CONSTRAINT FK_report_report_type FOREIGN KEY (report_type_id) 
-    REFERENCES ReportType (report_type_id) ON DELETE CASCADE ON UPDATE CASCADE
-    report_id (report_id), CONSTRAINT FK_content_report FOREIGN KEY (report_id) 
-    REFERENCES Report (report_id) ON DELETE CASCADE ON UPDATE CASCADE
-)
-
-INSERT IGNORE INTO
-    Role (role_id, name)
+INSERT IGNORE INTO Role (role_id, name)
 VALUES (1, 'superadmin'),
     (2, 'admin'),
     (3, 'User');
 
-INSERT IGNORE INTO
-    ReportType (report_type_id, name)
+INSERT IGNORE INTO ReportType (report_type_id, name)
 VALUES (1, 'Faculty Matrix'),
     (2, 'Accomplishment Report');
