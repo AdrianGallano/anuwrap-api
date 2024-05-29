@@ -58,7 +58,7 @@ class User
         $email = $user['email'];
         $password = $user['password'];
         $status = $user['status'];
-        $image_name = "";
+        $image_name = "https://saddlebrown-hyena-720529.hostingersite.com/anuwrap-api/public/../uploads/user_avatar/default.png";
 
         $queryStr = "INSERT INTO User (username, first_name, last_name, email, password,status, image_name) 
         VALUES (:username, :first_name, :last_name, :email, :password, :status, :image_name)";
@@ -86,8 +86,7 @@ class User
 
     function uploadAvatar($id, $files)
     {
-        $base_directory = "../uploads/user_avatar/"; 
-        # addsite url here eg. https://saddlebrown-hyena-720529.hostingersite.com/anuwrap-api/public/../uploads/user_avatar/3_exit.png
+        $base_directory = "../uploads/user_avatar/";
         $target_file = $base_directory . basename($id . "_" . $files['image']['name']);
 
         try{
@@ -105,7 +104,7 @@ class User
             $stmt = $this->pdo->prepare($queryStr);
             $stmt->execute(
                 array(
-                    "image_name" => $target_file,
+                    "image_name" => "https://saddlebrown-hyena-720529.hostingersite.com/anuwrap-api/public/" . $target_file,
                     "id" => $id
                 )
             );
