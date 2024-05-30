@@ -80,4 +80,17 @@ class ReportController
         }
         echo json_encode($payload);
     }
+
+    function getAllReportsWithContentByWorkspace($request)
+    {
+        $workspace_id = $request["workspaceId"];
+        $payload = $this->reportService->getAllReportsWithContentByWorkspace($workspace_id);
+
+        if(array_key_exists("code", $payload))
+        {
+            http_response_code($payload["code"]);
+            unset($payload["code"]);
+        }
+        echo json_encode($payload);
+    }
 }

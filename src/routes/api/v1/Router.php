@@ -62,6 +62,7 @@ class Router
             $r->addRoute('GET', '/reports/{reportId:\d+}', [ReportController::class, 'getReport']);
             $r->addRoute('PUT', '/reports/{reportId:\d+}', [ReportController::class, 'updateReport']);
             $r->addRoute('DELETE', '/reports/{reportId:\d+}', [ReportController::class, 'deleteReport']);
+            $r->addRoute('GET', '/workspaces/{workspaceId:\d+}/reports/content', [ReportController::class, 'getAllReportsWithContentByWorkspace']);
 
             /* roles */
             $r->addRoute('GET', '/roles', [RoleController::class, 'getAllRole']);

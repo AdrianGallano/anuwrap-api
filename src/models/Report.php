@@ -32,9 +32,9 @@ class Report
 
     function getAll($filter = "")
     {
-        if($filter == ""){
+        if ($filter == "") {
             $queryStr = "SELECT * FROM Report";
-        }else{
+        } else {
             $queryStr = "SELECT * FROM Report WHERE $filter";
         }
 
@@ -116,6 +116,27 @@ class Report
         } catch (PDOException $e) {
             error_log($e->getMessage());
             return false;
+        }
+    }
+
+    function getAllReportsWithContentByWorkspace($workspace_id)
+    {
+        $queryStr = "SELECT Report.*, Content.* FROM Report 
+        JOIN Content ON Report.report_id = Content.report_id
+        WHERE Report.workspace_id = :workspace_id";  
+
+        $stmt = $this->pdo->prepare($queryStr);
+
+        try {
+            $stmt->execute(array(
+                "workspace_id" => $workspace_id
+            ));
+
+            $report = $stmt->fetchAll();
+            return $report;
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return null;
         }
     }
 }
