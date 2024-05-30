@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS UserWorkspace (
 
 CREATE TABLE IF NOT EXISTS Content (
     content_id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-    body TEXT,
+    body LONGTEXT,
     report_id INT(10) UNSIGNED NOT NULL, 
     PRIMARY KEY (content_id),
     KEY report_id (report_id),
