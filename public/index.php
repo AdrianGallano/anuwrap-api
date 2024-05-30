@@ -4,7 +4,7 @@ require_once __DIR__ . "/../bootstrap.php";
 
 use Src\Routes\Api\V1\Router;
 // https://anuwrap.vercel.app
-header("Access-Control-Allow-Origin:  http://localhost:4200");
+header("Access-Control-Allow-Origin: http://localhost:4200");
 header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Methods: OPTIONS, GET, POST, PUT, PATCH, DELETE");
 header("Access-Control-Max-Age: 3600");

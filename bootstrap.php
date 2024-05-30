@@ -20,3 +20,11 @@ try {
     echo $e->getMessage();
     error_log($e->getMessage());
 }
+/* 
+DB_HOST=srv1158.hstgr.io
+DB_PORT=3306
+DB_NAME=u669059076_anuwrap
+DB_DRIVER=mysql
+DB_USERNAME=u669059076_dataflix	
+DB_PASSWORD=Dataflix_75
+SECRET_API_KEY = EUNILLELOVEKENT */
