@@ -113,6 +113,15 @@ CREATE TABLE IF NOT EXISTS Content (
     CONSTRAINT FK_content_report FOREIGN KEY (report_id) REFERENCES Report (report_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
+CREATE TABLE IF NOT EXISTS AnnualContent (
+    annual_content_id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    annual_body LONGTEXT,
+    annual_report_id INT(10) UNSIGNED NOT NULL, 
+    PRIMARY KEY (annual_content_id),
+    KEY annual_report_id (annual_report_id),
+    CONSTRAINT FK_content_annual_report FOREIGN KEY (annual_report_id) REFERENCES AnnualReport (annual_report_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
 INSERT IGNORE INTO Role (role_id, name)
 VALUES (1, 'superadmin'),
     (2, 'admin'),

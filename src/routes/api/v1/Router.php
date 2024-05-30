@@ -14,6 +14,7 @@ use Src\Controllers\RoleController;
 use Src\Controllers\ReportTypeController;
 use Src\Controllers\ReportSelectionController;
 use Src\Controllers\ContentController;
+use Src\Controllers\AnnualContentController;
 
 class Router
 {
@@ -88,6 +89,14 @@ class Router
             $r->addRoute('GET', '/contents/{contentId:\d+}', [ContentController::class, 'getContent']);
             $r->addRoute('DELETE', '/contents/{contentId:\d+}', [ContentController::class, 'deleteContent']);
             $r->addRoute('PUT', '/contents/{contentId:\d+}', [ContentController::class, 'updateContent']);
+
+            /* annual content */
+            $r->addRoute('POST', '/annual-contents', [AnnualContentController::class, 'postAnnualContent']);
+            $r->addRoute('GET', '/annual-contents', [AnnualContentController::class, 'getAllAnnualContent']);
+            $r->addRoute('GET', '/annual-contents/{annualContentId:\d+}', [AnnualContentController::class, 'getAnnualContent']);
+            $r->addRoute('DELETE', '/annual-contents/{annualContentId:\d+}', [AnnualContentController::class, 'deleteAnnualContent']);
+            $r->addRoute('PUT', '/annual-contents/{annualContentId:\d+}', [AnnualContentController::class, 'updateAnnualContent']);
+
         });
     }
 
