@@ -42,15 +42,16 @@ class ReportSelection
     function getAll($filterStr = "")
     {
         if ($filterStr == "") {
-            $queryStr = "SELECT ReportSelection.*, AnnualReport.*, Report.* FROM ReportSelection
+            $queryStr = "SELECT ReportSelection.*, AnnualReport.*, Report.*, Content.* FROM ReportSelection
             JOIN AnnualReport ON ReportSelection.annual_report_id = AnnualReport.annual_report_id
-            JOIN Report ON ReportSelection.report_id = Report.report_id";
-
-
+            JOIN Report ON ReportSelection.report_id = Report.report_id 
+            JOIN Content ON Report.report_id = Content.report_id";
         } else {
-            $queryStr = "SELECT ReportSelection.*, AnnualReport.*, Report.* FROM ReportSelection
+            $queryStr = "SELECT ReportSelection.*, AnnualReport.*, Report.*, Content.* FROM ReportSelection
             JOIN AnnualReport ON ReportSelection.annual_report_id = AnnualReport.annual_report_id
-            JOIN Report ON ReportSelection.report_id = Report.report_id WHERE ReportSelection.$filterStr";
+            JOIN Report ON ReportSelection.report_id = Report.report_id 
+            JOIN Content ON Report.report_id = Content.report_id
+            WHERE ReportSelection.$filterStr";
         }
         $stmt = $this->pdo->prepare($queryStr);
 
@@ -103,7 +104,7 @@ class ReportSelection
     {
         $new_annual_report_id = $request["annual_report_id"];
         $new_report_id = $request["report_id"];
-        
+
         $queryStr = "UPDATE ReportSelection SET annual_report_id = :new_annual_report_id, report_id = :new_report_id WHERE annual_report_id = :annual_report_id AND report_id = :report_id";
         $stmt = $this->pdo->prepare($queryStr);
         try {
