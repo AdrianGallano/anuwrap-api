@@ -53,19 +53,17 @@ class Report
     function create($request)
     {
         $title = $request["title"];
-        $report_type_id = $request["report_type_id"];
         $workspace_id = $request["workspace_id"];
 
         $queryStr = "INSERT INTO 
-        Report(title, report_type_id, workspace_id) VALUES
-        (:title, :report_type_id, :workspace_id)";
+        Report(title, workspace_id) VALUES
+        (:title, :workspace_id)";
 
         $stmt = $this->pdo->prepare($queryStr);
 
         try {
             $stmt->execute(array(
                 "title" => $title,
-                "report_type_id" => $report_type_id,
                 "workspace_id" => $workspace_id,
             ));
             return $this->pdo->lastInsertId();
@@ -96,18 +94,16 @@ class Report
     function update($request, $id)
     {
         $title = $request["title"];
-        $report_type_id = $request["report_type_id"];
         $workspace_id = $request["workspace_id"];
 
         $queryStr = "UPDATE Report 
-            SET title=:title, report_type_id=:report_type_id, workspace_id=:workspace_id WHERE report_id = :id";
+            SET title=:title, workspace_id=:workspace_id WHERE report_id = :id";
 
         $stmt = $this->pdo->prepare($queryStr);
         try {
             $stmt->execute(
                 array(
                     "title" => $title,
-                    "report_type_id" => $report_type_id,
                     "workspace_id" => $workspace_id,
                     "id" => $id
                 )

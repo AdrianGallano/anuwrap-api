@@ -9,7 +9,7 @@ $dotenv->safeLoad();
 
 try {
     $pdo = (new DatabaseConnector)->getConnection();
-    $sql = file_get_contents(__DIR__ . "\migrations\anuwrap_v5.sql");
+    $sql = file_get_contents(__DIR__ . "\migrations\anuwrap_v6.sql");
     $statements = explode(';', $sql);
     foreach ($statements as $statement) {
         if (!empty(trim($statement))) {

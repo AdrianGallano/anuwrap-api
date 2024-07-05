@@ -19,7 +19,7 @@ class ReportService
         $this->pdo = (new DatabaseConnector())->getConnection();
         $this->reportModel = new Report($this->pdo);
         $this->tokenService = new TokenService();
-        $this->filter = new Filter("title", "report_type_id", "workspace_id");
+        $this->filter = new Filter("title", "workspace_id");
     }
 
     function create($report)
@@ -30,11 +30,11 @@ class ReportService
             return Response::payload(404, false, "unauthorized access");
         }
 
-        if (!Checker::isFieldExist($report, ["title",  "report_type_id", "workspace_id"])) {
+        if (!Checker::isFieldExist($report, ["title", "workspace_id"])) {
             return Response::payload(
                 400,
                 false,
-                "title, report_type_id, and workspace_id is required"
+                "title, and workspace_id is required"
             );
         }
 

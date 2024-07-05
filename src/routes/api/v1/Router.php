@@ -11,7 +11,6 @@ use Src\Controllers\WorkspaceController;
 use Src\Controllers\UserWorkspaceController;
 use Src\Controllers\DocumentationController;
 use Src\Controllers\RoleController;
-use Src\Controllers\ReportTypeController;
 use Src\Controllers\ReportSelectionController;
 use Src\Controllers\ContentController;
 use Src\Controllers\AnnualContentController;
@@ -52,10 +51,6 @@ class Router
             $r->addRoute('GET', '/workspaces/{workspaceId:\d+}/userworkspaces', [UserWorkspaceController::class, 'getAllUserWorkspaceWithWorkspace']);
             $r->addRoute('PATCH', '/users/{userId:\d+}/workspaces/{workspaceId:\d+}/userworkspaces', [UserWorkspaceController::class, 'updateUserWorkspace']);
             $r->addRoute('DELETE', '/users/{userId:\d+}/workspaces/{workspaceId:\d+}/userworkspaces', [UserWorkspaceController::class, 'deleteUserWorkspace']);
-
-            /* report types */
-            $r->addRoute('GET', '/report-types', [ReportTypeController::class, 'getAllReportTypes']);
-            $r->addRoute('GET', '/report-types/{reportTypeId:\d+}', [ReportTypeController::class, 'getReportType']);
 
             /* reports*/
             $r->addRoute('POST', '/reports', [ReportController::class, 'createReport']);
