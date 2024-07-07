@@ -7,6 +7,8 @@ use Exception;
 class User
 {
     private $pdo;
+    private static $hostname = "http://localhost";
+
     function __construct($pdo)
     {
         $this->pdo = $pdo;
@@ -58,7 +60,7 @@ class User
         $email = $user['email'];
         $password = $user['password'];
         $status = $user['status'];
-        $image_name = "https://saddlebrown-hyena-720529.hostingersite.com/anuwrap-api/public/../uploads/user_avatar/default.png";
+        $image_name = self::$hostname . "/anuwrap-api/public/../uploads/user_avatar/default.png";
 
         $queryStr = "INSERT INTO User (username, first_name, last_name, email, password,status, image_name) 
         VALUES (:username, :first_name, :last_name, :email, :password, :status, :image_name)";
@@ -104,7 +106,7 @@ class User
             $stmt = $this->pdo->prepare($queryStr);
             $stmt->execute(
                 array(
-                    "image_name" => "https://saddlebrown-hyena-720529.hostingersite.com/anuwrap-api/public/" . $target_file,
+                    "image_name" => self::$hostname . "/anuwrap-api/public/" . $target_file,
                     "id" => $id
                 )
             );
