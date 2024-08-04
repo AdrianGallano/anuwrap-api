@@ -14,6 +14,7 @@ use Src\Controllers\RoleController;
 use Src\Controllers\ReportSelectionController;
 use Src\Controllers\ContentController;
 use Src\Controllers\AnnualContentController;
+use Src\Controllers\SentenceController;
 
 class Router
 {
@@ -92,6 +93,12 @@ class Router
             $r->addRoute('DELETE', '/annual-contents/{annualContentId:\d+}', [AnnualContentController::class, 'deleteAnnualContent']);
             $r->addRoute('PUT', '/annual-contents/{annualContentId:\d+}', [AnnualContentController::class, 'updateAnnualContent']);
 
+            /* sentences */
+            $r->addRoute('POST', '/sentences', [SentenceController::class, 'postSentence']);
+            $r->addRoute('GET', '/sentences/{sentenceId:\d+}', [SentenceController::class, 'getSentence']);
+            $r->addRoute('GET', '/sentences', [SentenceController::class, 'getSentences']);
+            $r->addRoute('PUT', '/sentences/{sentenceId:\d+}', [SentenceController::class, 'putSentence']);
+            $r->addRoute('DELETE', '/sentences/{sentenceId:\d+}', [SentenceController::class, 'deleteSentence']);
         });
     }
 

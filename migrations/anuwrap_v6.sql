@@ -118,3 +118,17 @@ VALUES (1, 'superadmin'),
     (2, 'admin'),
     (3, 'User');
 
+CREATE TABLE IF NOT EXISTS Sentences (
+    sentence_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    text LONGTEXT NOT NULL,
+    PRIMARY KEY (sentence_id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+CREATE TABLE IF NOT EXISTS ContentSentences (
+    content_id INT(10) UNSIGNED NOT NULL,
+    sentence_id INT(10) UNSIGNED NOT NULL,
+    PRIMARY KEY (content_id, sentence_id),
+    KEY sentence_id (sentence_id),
+    CONSTRAINT FK_contentsentences_content FOREIGN KEY (content_id) REFERENCES Content (content_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT FK_contentsentences_sentence FOREIGN KEY (sentence_id) REFERENCES Sentences (sentence_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
